@@ -66,4 +66,12 @@ public class ProductController {
         httpSession.invalidate();
         return "login";
     }
+
+    @GetMapping("/user/search")
+    public String search(Model model, @RequestParam(name = "keyword") String keyword){
+        List<Product> products = productRepository.findByNameContainsIgnoreCase(keyword);
+        model.addAttribute("productList", products);
+        model.addAttribute("keyword", keyword);
+        return "products";
+    }
 }
