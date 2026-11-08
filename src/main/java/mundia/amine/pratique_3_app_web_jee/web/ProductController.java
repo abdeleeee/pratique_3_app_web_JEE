@@ -1,5 +1,6 @@
 package mundia.amine.pratique_3_app_web_jee.web;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import mundia.amine.pratique_3_app_web_jee.entities.Product;
 import mundia.amine.pratique_3_app_web_jee.repository.ProductRepository;
@@ -53,5 +54,16 @@ public class ProductController {
     @GetMapping("/notAuthorized")
     public String notAuthorized(){
         return "notAuthorized";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession httpSession){
+        httpSession.invalidate();
+        return "login";
     }
 }
