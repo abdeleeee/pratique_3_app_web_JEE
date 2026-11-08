@@ -74,4 +74,19 @@ public class ProductController {
         model.addAttribute("keyword", keyword);
         return "products";
     }
+
+    @GetMapping("/admin/editProduct")
+    public String editProduct(Model model, @RequestParam(name = "id") Long id){
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        model.addAttribute("product", product);
+        return "edit-product";
+    }
+
+    @PostMapping("/admin/updateProduct")
+    public String updateProduct(@Valid Product product, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) return "edit-product";
+        productRepository.save(product);
+        return "redirect:/user/index";
+    }
 }

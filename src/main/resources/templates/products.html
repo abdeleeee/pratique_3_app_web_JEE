@@ -38,9 +38,12 @@
                 <td th:text="${p.price}"></td>
                 <td th:text="${p.quantity}"></td>
                 <td sec:authorize="hasRole('ADMIN')">
-                    <form method="post" th:action="@{/admin/delete(id=${p.id})}">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-warning" th:href="@{/admin/editProduct(id=${p.id})}">Edit</a>
+                        <form method="post" th:action="@{/admin/delete(id=${p.id})}">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         </tbody>
